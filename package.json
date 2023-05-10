@@ -1,0 +1,27 @@
+{
+  "name": "samu-app",
+  "version": "1.0.0",
+  "description": "samu-app",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon v1/src/app.js"
+  },
+  "author": "samu",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "helmet": "^6.0.1",
+    "http-status": "^1.5.3",
+    "joi": "^17.7.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.7.4",
+    "nodemailer": "^6.8.0",
+    "nodemon": "^2.0.20",
+    "path": "^0.12.7",
+    "winston": "^3.8.2"
+  }
+}

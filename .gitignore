@@ -1,0 +1,9 @@
+node_modules
+.env
+v1/src/logs
+v1/src/logs/news/combined.log
+v1/src/logs/news/info.log
+v1/src/logs/users/combined.log
+v1/src/logs/users/info.log
+v1/src/logs/news/combined.log
+v1/src/logs/news/info.log
