@@ -26,5 +26,5 @@ app.use((req, res, next) => {
 app.use(errorHandler);
 
 app.listen(process.env.PORT || 5000, () => {
-  console.log(`SERVER ${process.env.PORT} PORTUNDA ÇALIŞIYOR.`);
+  console.log(`SERVER ${process.env.PORT} is running`);
 });
