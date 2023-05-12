@@ -26,7 +26,7 @@ class UserController {
       const user = await userService.findOne({ email, password: hashedPassword });
 
       if (!user) {
-        return next(new ApiError("Invalid email or password", statusCode.BAD_REQUEST));
+        return next(new ApiError("Invalid email or password", httpStatus.BAD_REQUEST));
       }
 
       const token = generateAccessToken(user);
@@ -51,6 +51,7 @@ class UserController {
         lastName: user.lastName,
         email: user.email,
         profileImage: user.profileImage,
+        role: user.role,
       };
 
       successResponse(res, httpStatus.OK, userInfo);
