@@ -26,6 +26,6 @@ const StudentSchema = new mongoose.Schema(
   { timestamps: true, versionKey: false }
 );
 
-const User = mongoose.model("Student", StudentSchema);
+const Student = mongoose.model("Student", StudentSchema);
 
-module.exports = User;
+module.exports = Student;
