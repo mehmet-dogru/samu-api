@@ -39,7 +39,7 @@ class ComplaintController {
       const complaint = await complaintService.update(req.params.id, complaintStatus);
 
       if (!complaint) {
-        return next(new ApiError(err.message, httpStatus.BAD_REQUEST));
+        return next(new ApiError("Complaint Not Found", httpStatus.BAD_REQUEST));
       }
       successResponse(res, httpStatus.OK, complaint);
     } catch (err) {
