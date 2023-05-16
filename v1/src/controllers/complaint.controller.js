@@ -29,6 +29,23 @@ class ComplaintController {
       return next(new ApiError(err.message, httpStatus.BAD_REQUEST));
     }
   }
+
+  async updateStatus(req, res, next) {
+    try {
+      const complaintStatus = {
+        status: req.body.status,
+      };
+
+      const complaint = await complaintService.update(req.params.id, complaintStatus);
+
+      if (!complaint) {
+        return next(new ApiError(err.message, httpStatus.BAD_REQUEST));
+      }
+      successResponse(res, httpStatus.OK, complaint);
+    } catch (err) {
+      return next(new ApiError(err.message, httpStatus.BAD_REQUEST));
+    }
+  }
 }
 
 module.exports = new ComplaintController();

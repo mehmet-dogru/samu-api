@@ -9,5 +9,6 @@ const authorization = require("../middlewares/authorization.middleware");
 
 router.route("/create").post(authenticate, validate(validationSchema.createComplaintSchema), complaintController.create);
 router.route("/").get(authenticate, complaintController.list);
+router.route("/update-status/:id").put(authenticate, validate(validationSchema.updateComplaintStatusSchema), complaintController.updateStatus);
 
 module.exports = router;
