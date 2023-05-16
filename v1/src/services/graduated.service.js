@@ -13,6 +13,9 @@ class GraduatedService extends BaseService {
       .populate({
         path: "userId",
         select: "firstName lastName email profileImage",
+      })
+      .populate({
+        path: "company",
       });
     return students;
   }
