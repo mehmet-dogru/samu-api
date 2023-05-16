@@ -6,4 +6,8 @@ const createComplaintSchema = Joi.object({
   status: Joi.string(),
 });
 
-module.exports = { createComplaintSchema };
+const updateComplaintStatusSchema = Joi.object({
+  status: Joi.string().valid("New", "In Progress", "Resolved").default("New"),
+});
+
+module.exports = { createComplaintSchema, updateComplaintStatusSchema };
