@@ -11,7 +11,7 @@ class StudentService extends BaseService {
       .limit(limit * 1)
       .skip((page - 1) * limit)
       .populate({
-        path: "userId",
+        path: "user",
         select: "firstName lastName email profileImage",
       });
     return students;

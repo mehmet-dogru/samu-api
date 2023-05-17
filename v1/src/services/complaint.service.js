@@ -10,7 +10,7 @@ class ComplaintService extends BaseService {
     const complaints = BaseModel.find(where || {})
       .limit(limit * 1)
       .skip((page - 1) * limit).populate({
-        path : "userId",
+        path : "user",
         select : "firstName lastName email profileImage"
       });
     return complaints;
