@@ -6,7 +6,7 @@ const verifyAndAuthorizationToken = (roles) => async (req, res, next) => {
   try {
     const user = await userService.findById(req.userId);
 
-    const role = roles.every((item) => item.includes(user.role));
+    const role = roles.sum((item) => item.includes(user.role));
     if (role) {
       next();
     } else {
