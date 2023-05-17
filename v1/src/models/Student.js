@@ -3,7 +3,7 @@ const ROLES = require("../references/role.reference");
 
 const StudentSchema = new mongoose.Schema(
   {
-    userId: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
@@ -21,7 +21,6 @@ const StudentSchema = new mongoose.Schema(
       enum: ["1", "2", "3", "4"],
       required: true,
     },
-    role: { type: [ROLES], default: ROLES.STUDENT },
   },
   { timestamps: true, versionKey: false }
 );

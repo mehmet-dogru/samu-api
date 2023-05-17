@@ -3,7 +3,7 @@ const ROLES = require("../references/role.reference");
 
 const GraduatedSchema = new mongoose.Schema(
   {
-    userId: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
@@ -32,7 +32,6 @@ const GraduatedSchema = new mongoose.Schema(
       required: false,
       default: null, //Eğer null ise "Halen" yazdırılacaktır.
     },
-    role: { type: [ROLES], default: ROLES.GRADUATED },
   },
   { timestamps: true, versionKey: false }
 );
