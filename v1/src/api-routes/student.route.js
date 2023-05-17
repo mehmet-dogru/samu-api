@@ -9,7 +9,7 @@ const authorization = require("../middlewares/authorization.middleware");
 
 router
   .route("/create")
-  .post(authenticate, authorization(["admin","student"]), validate(validationSchema.createStudentSchema), studentController.create);
+  .post(authenticate, authorization(["admin"]), validate(validationSchema.createStudentSchema), studentController.create);
 router.route("/").get(authenticate, studentController.list);
 
 module.exports = router;

@@ -2,6 +2,7 @@ const httpStatus = require("http-status");
 const ApiError = require("../responses/error.response");
 
 const ErrorHandler = (err, req, res, next) => {
+  console.log(err);
   if (err instanceof ApiError) {
     return res.status(err.statusCode || httpStatus.INTERNAL_SERVER_ERROR).json(err.toJSON());
   }

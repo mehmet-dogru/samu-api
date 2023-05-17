@@ -10,7 +10,7 @@ const stringPassswordError = new Error(
     "Minimum eight in length"
 );
 
-const registerSchema = Joi.object({
+const registerSchema = Joi.object().keys({
   firstName: Joi.string().required().min(3).max(50),
   lastName: Joi.string().required().min(3).max(50),
   email: Joi.string().required().email(),
