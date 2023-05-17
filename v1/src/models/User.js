@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-const logger = require("../scripts/logger/Users");
-const ROLES = require("../references/role.reference");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -37,7 +35,7 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       default: "default.png",
     },
-    role: { type: [ROLES], default: ROLES.STUDENT },
+    role: { type: String, enum: ["admin", "student", "graduated"] },
   },
   { timestamps: true, versionKey: false }
 );

@@ -1,5 +1,5 @@
 const Joi = require("joi");
-const  ROLES = require("../references/role.reference");
+const ROLES = require("../references/role.reference");
 
 const pattern = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
@@ -15,14 +15,13 @@ const registerSchema = Joi.object({
   lastName: Joi.string().required().min(3).max(50),
   email: Joi.string().required().email(),
   password: Joi.string().regex(RegExp(pattern)).error(stringPassswordError).required(),
-  role: Joi.string().valid(ROLES),
+  role: Joi.string().valid("admin", "student", "graduated"),
   passwordConfirm: Joi.any().valid(Joi.ref("password")).required().label("Confirm password").messages({ "any.only": "{{#label}} does not match" }),
 });
-
 
 const loginSchema = Joi.object({
   email: Joi.string().required().email(),
   password: Joi.string().required(),
 });
 
-module.exports = { registerSchema,loginSchema };
+module.exports = { registerSchema, loginSchema };
