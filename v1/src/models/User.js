@@ -35,7 +35,7 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       default: "default.png",
     },
-    role: { type: String, enum: ["admin", "student", "graduated"] },
+    role: { type: String, enum: ["admin", "student", "graduated"], required: true },
   },
   { timestamps: true, versionKey: false }
 );
