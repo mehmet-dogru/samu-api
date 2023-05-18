@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const ROLES = require("../references/role.reference");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -35,7 +36,24 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       default: "default.png",
     },
-    role: { type: String, enum: ["admin", "student", "graduated"], required: true },
+    studentId: {
+      type: String,
+      unique: true,
+      sparse:true
+    },
+    department: {
+      type: String,
+    },
+    grade: {
+      type: String,
+      enum: ["1", "2", "3", "4"],
+      required: false,
+    },
+    company: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Company",
+    },
+    role: { type: String, enum: [ROLES.ADMIN,ROLES.GRADUATED,ROLES.STUDENT], required: true },
   },
   { timestamps: true, versionKey: false }
 );

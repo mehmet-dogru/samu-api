@@ -3,6 +3,7 @@ const { passwordToHash, generateAccessToken } = require("../scripts/utils/helper
 const userService = require("../services/user.service");
 const ApiError = require("../responses/error.response");
 const successResponse = require("../responses/success.response");
+const ROLES = require("../references/role.reference");
 
 class UserController {
   async register(req, res, next) {
@@ -45,16 +46,18 @@ class UserController {
         return next(new ApiError("User not found", httpStatus.NOT_FOUND));
       }
 
-      const userInfo = {
-        _id: req.userId,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        profileImage: user.profileImage,
-        role: user.role,
-      };
+      successResponse(res, httpStatus.OK, user);
+    } catch (error) {
+      return next(new ApiError(error.message, httpStatus.BAD_REQUEST));
+    }
+  }
 
-      successResponse(res, httpStatus.OK, userInfo);
+  async list(req, res, next) {
+    try {
+      const { page = 1, limit = 10, role = ROLES.STUDENT } = req.query;
+      const users = await userService.list(page, limit, { role });
+
+      successResponse(res, httpStatus.OK, users);
     } catch (error) {
       return next(new ApiError(error.message, httpStatus.BAD_REQUEST));
     }
