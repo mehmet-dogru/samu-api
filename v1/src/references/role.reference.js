@@ -4,4 +4,4 @@ const ROLES = {
   GRADUATED: "graduated",
 };
 
-module.export = ROLES;
+module.exports = ROLES;

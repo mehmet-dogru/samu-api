@@ -6,9 +6,9 @@ const validate = require("../middlewares/validate.middleware");
 const validationSchema = require("../validations/company.validation");
 const authenticate = require("../middlewares/authenticate.middleware");
 const authorization = require("../middlewares/authorization.middleware");
+const ROLES = require("../references/role.reference");
 
-//router.route("/create").post(authenticate, authorization("graduated"), companyController.create);
-router.route("/create").post(authenticate, validate(validationSchema.createCompanySchema), companyController.create);
-router.route("/").get(authenticate, companyController.list);
+router.route("/").post(authenticate,authorization([ROLES.GRADUATED]), validate(validationSchema.createCompanySchema), companyController.create);
+router.route("/:companyId").patch(authenticate,authorization([ROLES.GRADUATED]), validate(validationSchema.updateCompanySchema), companyController.update);
 
 module.exports = router;
