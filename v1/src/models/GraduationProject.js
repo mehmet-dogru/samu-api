@@ -21,12 +21,10 @@ const GraduationProjectSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
-    supervisor: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
+    supervisor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   { timestamps: false, versionKey: false }
 );

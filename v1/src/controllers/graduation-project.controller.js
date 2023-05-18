@@ -8,6 +8,7 @@ class GraduationProjectController {
     try {
       const project = await graduationProjectService.create({
         ...req.body,
+        supervisor: req.userId,
       });
 
       successResponse(res, httpStatus.CREATED, project);
