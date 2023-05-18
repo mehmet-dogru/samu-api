@@ -39,7 +39,7 @@ const UserSchema = new mongoose.Schema(
     studentId: {
       type: String,
       unique: true,
-      sparse:true
+      sparse: true,
     },
     department: {
       type: String,
@@ -53,7 +53,7 @@ const UserSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Company",
     },
-    role: { type: String, enum: [ROLES.ADMIN,ROLES.GRADUATED,ROLES.STUDENT], required: true },
+    role: { type: String, enum: [ROLES.ADMIN, ROLES.GRADUATED, ROLES.STUDENT, ROLES.ACADEMICIAN], required: true },
   },
   { timestamps: true, versionKey: false }
 );

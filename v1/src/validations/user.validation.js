@@ -15,7 +15,7 @@ const registerSchema = Joi.object().keys({
   lastName: Joi.string().required().min(3).max(50),
   email: Joi.string().required().email(),
   password: Joi.string().regex(RegExp(pattern)).error(stringPassswordError).required(),
-  role: Joi.string().required().valid(ROLES.ADMIN,ROLES.GRADUATED,ROLES.STUDENT),
+  role: Joi.string().required().valid(ROLES.ADMIN,ROLES.GRADUATED,ROLES.STUDENT, ROLES.ACADEMICIAN),
   passwordConfirm: Joi.any().valid(Joi.ref("password")).required().label("Confirm password").messages({ "any.only": "{{#label}} does not match" }),
 });
 
