@@ -3,7 +3,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const config = require("./config/index");
 const loaders = require("./loaders/index");
-const { userRoutes, postRoutes, companyRoutes, complaintRoutes } = require("./api-routes");
+const { userRoutes, postRoutes, companyRoutes, complaintRoutes, graduationProjectRoutes } = require("./api-routes");
 const errorHandler = require("./middlewares/error-handler.middleware");
 const ApiError = require("./responses/error.response");
 const httpStatus = require("http-status");
@@ -20,6 +20,7 @@ app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 app.use("/companies", companyRoutes);
 app.use("/complaint", complaintRoutes);
+app.use("/graduation-projects", graduationProjectRoutes);
 
 app.use((req, res, next) => {
   next(new ApiError("ENDPOINT NOT FOUND", httpStatus.BAD_REQUEST));
