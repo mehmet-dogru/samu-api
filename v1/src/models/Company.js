@@ -18,6 +18,15 @@ const CompanySchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    startingDateOfEmployment: {
+      type: Date,
+      required: true,
+    },
+    endingDateOfEmployment: {
+      type: Date,
+      required: false,
+      default: null,
+    },
   },
   { timestamps: true, versionKey: false }
 );
