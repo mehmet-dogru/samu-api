@@ -2,6 +2,7 @@ const ApiError = require("../responses/error.response");
 const httpStatus = require("http-status");
 const { createStudentSchema } = require("../validations/student.validation");
 const { createGraduatedSchema } = require("../validations/graduated.validation");
+const { createAcademicianSchema } = require("../validations/academician.validation");
 const ROLES = require("../references/role.reference");
 
 const validateUserCreateByRole = () => (req, res, next) => {
@@ -17,6 +18,9 @@ const validateUserCreateByRole = () => (req, res, next) => {
       break;
     case ROLES.GRADUATED:
       validate = createGraduatedSchema.validate(req.body);
+      break;
+    case ROLES.ACADEMICIAN:
+      validate = createAcademicianSchema.validate(req.body);
       break;
   }
 
