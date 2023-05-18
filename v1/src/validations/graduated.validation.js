@@ -1,11 +1,9 @@
 const Joi = require("joi");
+const {registerSchema} = require('./user.validation')
 
-const createGraduatedSchema = Joi.object({
-  userId: Joi.string().required(),
+//* Burası düzeltilebilir veya iyileştirilebilir
+const createGraduatedSchema = registerSchema.keys({
   department: Joi.string().required().min(1).max(100),
-  workedAt: Joi.string().min(2).max(20),
-  startingDateOfEmployment: Joi.date(),
-  endingDateOfEmployment: Joi.date(),
 });
 
 module.exports = { createGraduatedSchema };
