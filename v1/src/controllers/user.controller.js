@@ -57,7 +57,12 @@ class UserController {
       const { page = 1, limit = 10, role = ROLES.STUDENT } = req.query;
       const users = await userService.list(page, limit, { role });
 
-      successResponse(res, httpStatus.OK, users);
+      const filteredUsers = users.map((user) => {
+        const { _id, firstName, lastName, email, profileImage, studentId, department } = user;
+        return { _id, firstName, lastName, email, profileImage, studentId, department };
+      });
+
+      successResponse(res, httpStatus.OK, filteredUsers);
     } catch (error) {
       return next(new ApiError(error.message, httpStatus.BAD_REQUEST));
     }
