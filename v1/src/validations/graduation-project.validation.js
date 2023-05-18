@@ -5,7 +5,6 @@ const createGraduationProjectSchema = Joi.object({
   date: Joi.date().required(),
   description: Joi.string().min(5),
   students: Joi.array().items(Joi.string().length(24).hex().required()),
-  supervisor: Joi.array().items(Joi.string().length(24).hex().required()),
 });
 
 // const updateGraduationProjectSchema = Joi.object({
