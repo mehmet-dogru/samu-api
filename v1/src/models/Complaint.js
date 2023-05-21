@@ -10,7 +10,7 @@ const ComplaintSchema = new mongoose.Schema(
     complaintText: {
       type: String,
       required: true,
-      min : 2,
+      min: 2,
     },
     date: {
       type: Date,
@@ -20,6 +20,11 @@ const ComplaintSchema = new mongoose.Schema(
       type: String,
       enum: ["New", "In Progress", "Resolved"],
       default: "New",
+    },
+    visibility: {
+      type: String,
+      enum: ["Public", "Private", "AdminOnly"],
+      default: "Public",
     },
   },
   { timestamps: true, versionKey: false }
