@@ -19,7 +19,7 @@ app.use(cors());
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 app.use("/companies", companyRoutes);
-app.use("/complaint", complaintRoutes);
+app.use("/complaints", complaintRoutes);
 app.use("/graduation-projects", graduationProjectRoutes);
 
 app.use((req, res, next) => {
