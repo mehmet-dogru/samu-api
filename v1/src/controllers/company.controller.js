@@ -11,7 +11,7 @@ class CompanyController {
       const company = await companyService.create({ ...req.body });
 
       await userService.update(req.userId, { company: company._id });
-      
+
       successResponse(res, httpStatus.CREATED, company);
     } catch (err) {
       return next(new ApiError(err.message, httpStatus.BAD_REQUEST));
@@ -36,6 +36,19 @@ class CompanyController {
         return next(new ApiError("Not Found Companies", httpStatus.BAD_REQUEST));
       }
       successResponse(res, httpStatus.OK, companies);
+    } catch (err) {
+      return next(new ApiError(err.message, httpStatus.BAD_REQUEST));
+    }
+  }
+
+  async remove(req, res, next) {
+    try {
+      const company = await companyService.delete(req.params.companyId);
+      if (!company) {
+        return next(new ApiError("Not Found Companies", httpStatus.BAD_REQUEST));
+      }
+
+      successResponse(res, httpStatus.OK, { _id: company._id, message: "Company deleted" });
     } catch (err) {
       return next(new ApiError(err.message, httpStatus.BAD_REQUEST));
     }
