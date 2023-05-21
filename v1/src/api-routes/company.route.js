@@ -8,7 +8,15 @@ const authenticate = require("../middlewares/authenticate.middleware");
 const authorization = require("../middlewares/authorization.middleware");
 const ROLES = require("../references/role.reference");
 
-router.route("/").post(authenticate,authorization([ROLES.GRADUATED]), validate(validationSchema.createCompanySchema), companyController.create);
-router.route("/:companyId").patch(authenticate,authorization([ROLES.GRADUATED]), validate(validationSchema.updateCompanySchema), companyController.update);
+router
+  .route("/")
+  .post(authenticate, authorization([ROLES.GRADUATED, ROLES.ADMIN]), validate(validationSchema.createCompanySchema), companyController.create);
+router
+  .route("/:companyId")
+  .patch(authenticate, authorization([ROLES.GRADUATED, ROLES.ADMIN]), validate(validationSchema.updateCompanySchema), companyController.update);
+
+router.route("/").get(authenticate, companyController.list);
+
+router.route("/:companyId").delete(authenticate, authorization([ROLES.ADMIN]), companyController.remove);
 
 module.exports = router;
