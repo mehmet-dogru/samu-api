@@ -12,7 +12,7 @@ router
   .route("/")
   .post(
     authenticate,
-    authorization([ROLES.ACADEMICIAN]),
+    authorization([ROLES.ACADEMICIAN, ROLES.ADMIN]),
     validate(validationSchema.createGraduationProjectSchema),
     graduationProjectController.create
   );
