@@ -6,6 +6,18 @@ class GraduationProjectService extends BaseService {
     super(BaseModel);
   }
 
+  findById(id) {
+    return this.BaseModel.findById(id)
+      .populate({
+        path: "students",
+        select: "firstName lastName profileImage studentId department",
+      })
+      .populate({
+        path: "supervisor",
+        select: "firstName lastName profileImage department",
+      });
+  }
+
   list(page, limit, where) {
     const projects = BaseModel.find(where || {})
       .limit(limit * 1)

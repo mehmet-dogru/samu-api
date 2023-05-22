@@ -9,6 +9,7 @@ const authorization = require("../middlewares/authorization.middleware");
 const ROLES = require("../references/role.reference");
 
 router.route("/").get(authenticate, graduationProjectController.list);
+router.route("/:projectId").get(authenticate, graduationProjectController.listProjectById);
 
 router
   .route("/")
