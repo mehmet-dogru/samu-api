@@ -43,6 +43,17 @@ class ComplaintController {
     }
   }
 
+  async listComplaintByUserId(req, res, next) {
+    try {
+      const { page = 1, limit = 10 } = req.query;
+      const complaints = await complaintService.list(page, limit, { user: req.userId });
+
+      successResponse(res, httpStatus.OK, complaints);
+    } catch (err) {
+      return next(new ApiError(err.message, httpStatus.BAD_REQUEST));
+    }
+  }
+
   async updateStatus(req, res, next) {
     try {
       const complaintStatus = {
@@ -72,6 +83,20 @@ class ComplaintController {
         return next(new ApiError("Complaint Not Found", httpStatus.BAD_REQUEST));
       }
       successResponse(res, httpStatus.OK, complaint);
+    } catch (err) {
+      return next(new ApiError(err.message, httpStatus.BAD_REQUEST));
+    }
+  }
+
+  async remove(req, res, next) {
+    try {
+      const deletedComplaint = await complaintService.delete(req.params.complaintId);
+
+      if (!deletedComplaint) {
+        return next(new ApiError("Complaint Not Found", httpStatus.BAD_REQUEST));
+      }
+
+      successResponse(res, httpStatus.OK, { id: deletedComplaint._id, message: "Deleted successfully" });
     } catch (err) {
       return next(new ApiError(err.message, httpStatus.BAD_REQUEST));
     }
