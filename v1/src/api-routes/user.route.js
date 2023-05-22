@@ -12,5 +12,5 @@ router.post("/register", validateUserCreateByRole(), userController.register);
 router.post("/login", validate(validationSchema.loginSchema), userController.login);
 router.get("/profile", authenticate, userController.profile);
 router.get("/", authenticate, userController.list);
-
+router.post("/update-profile-image", authenticate, userController.updateProfileImage);
 module.exports = router;

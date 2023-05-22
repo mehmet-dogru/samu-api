@@ -1,4 +1,5 @@
 const express = require("express");
+const fileUpload = require("express-fileupload");
 const cors = require("cors");
 const helmet = require("helmet");
 const config = require("./config/index");
@@ -7,14 +8,17 @@ const { userRoutes, postRoutes, companyRoutes, complaintRoutes, graduationProjec
 const errorHandler = require("./middlewares/error-handler.middleware");
 const ApiError = require("./responses/error.response");
 const httpStatus = require("http-status");
+const path = require("path");
 
 config();
 loaders();
 
 const app = express();
 app.use(express.json());
+app.use("/uploads", express.static(path.join(__dirname, "./", "uploads")));
 app.use(helmet());
 app.use(cors());
+app.use(fileUpload());
 
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
