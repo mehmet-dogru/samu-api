@@ -10,15 +10,25 @@ const ROLES = require("../references/role.reference");
 
 router.route("/").post(authenticate, validate(validationSchema.createComplaintSchema), complaintController.create);
 router.route("/").get(authenticate, complaintController.list);
-router.route("/list-all").get(authenticate, authorization([ROLES.ACADEMICIAN, ROLES.ADMIN]), complaintController.listAll);
-router.route("/update-status/:id").put(authenticate, validate(validationSchema.updateComplaintStatusSchema), complaintController.updateStatus);
+router.route("/all").get(authenticate, authorization([ROLES.ACADEMICIAN, ROLES.ADMIN]), complaintController.listAll);
+router.route("/user").get(authenticate, authorization([ROLES.ACADEMICIAN, ROLES.ADMIN, ROLES.STUDENT]), complaintController.listComplaintByUserId);
 router
-  .route("/update-visibility/:id")
-  .put(
+  .route("/status/:id")
+  .patch(
+    authenticate,
+    authorization([ROLES.ACADEMICIAN, ROLES.ADMIN]),
+    validate(validationSchema.updateComplaintStatusSchema),
+    complaintController.updateStatus
+  );
+router
+  .route("/visibility/:id")
+  .patch(
     authenticate,
     authorization([ROLES.ACADEMICIAN, ROLES.ADMIN]),
     validate(validationSchema.updateComplaintVisibilitySchema),
     complaintController.updateVisibility
   );
+
+router.route("/:complaintId").delete(authenticate, authorization([ROLES.ACADEMICIAN, ROLES.ADMIN, ROLES.STUDENT]), complaintController.remove);
 
 module.exports = router;
