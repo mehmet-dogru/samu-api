@@ -14,6 +14,5 @@ router
 
 router.route("/").get(authenticate, postController.list);
 
-router.route("/create-comment/:postId").post(authenticate, validate(validationSchema.commentValidation), postController.createComment);
 
 module.exports = router;

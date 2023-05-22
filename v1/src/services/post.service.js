@@ -13,11 +13,8 @@ class PostService extends BaseService {
       .populate({
         path: "author",
         select: "firstName lastName",
-      })
-      .populate({
-        path: "comments.author",
-        select: "firstName lastName",
       });
+
     return allPosts;
   }
 }

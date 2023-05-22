@@ -27,22 +27,6 @@ class PostController {
       return next(new ApiError(error.message, httpStatus.BAD_REQUEST));
     }
   }
-
-  async createComment(req, res, next) {
-    try {
-      const comment = {
-        author: req.userId,
-        ...req.body,
-      };
-
-      const post = await postService.update(req.params.postId, { $push: { comments: comment } });
-      await post.save();
-
-      successResponse(res, httpStatus.CREATED, post);
-    } catch (error) {
-      return next(new ApiError(error.message, httpStatus.BAD_REQUEST));
-    }
-  }
 }
 
 module.exports = new PostController();
