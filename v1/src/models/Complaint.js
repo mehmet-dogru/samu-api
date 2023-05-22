@@ -16,6 +16,10 @@ const ComplaintSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+    to: {
+      type: String,
+      required: true,
+    },
     status: {
       type: String,
       enum: ["New", "In Progress", "Resolved"],
