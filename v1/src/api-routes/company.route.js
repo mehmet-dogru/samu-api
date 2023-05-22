@@ -17,6 +17,6 @@ router
 
 router.route("/").get(authenticate, companyController.list);
 
-router.route("/:companyId").delete(authenticate, authorization([ROLES.ADMIN]), companyController.remove);
+router.route("/:companyId").delete(authenticate, authorization([ROLES.GRADUATED, ROLES.ADMIN]), companyController.remove);
 
 module.exports = router;

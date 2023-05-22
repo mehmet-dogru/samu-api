@@ -44,9 +44,12 @@ class CompanyController {
   async remove(req, res, next) {
     try {
       const company = await companyService.delete(req.params.companyId);
+
       if (!company) {
         return next(new ApiError("Not Found Companies", httpStatus.BAD_REQUEST));
       }
+
+      await userService.update(req.userId, { company: null });
 
       successResponse(res, httpStatus.OK, { _id: company._id, message: "Company deleted" });
     } catch (err) {
