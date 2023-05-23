@@ -7,15 +7,16 @@ class UserService extends BaseService {
   }
 
   findById(id) {
-    return this.BaseModel.findById(id).populate({
+    return this.BaseModel.findById(id).populate({ path: "department", select: "name" }).populate({
       path: "company",
-    });;
+    });
   }
 
   list(page, limit, where) {
     const allUsers = BaseModel.find(where || {})
       .limit(limit * 1)
       .skip((page - 1) * limit)
+      .populate({ path: "department", select: "name" })
       .populate({
         path: "company",
       });

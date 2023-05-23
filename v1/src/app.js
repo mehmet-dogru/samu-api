@@ -4,7 +4,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const config = require("./config/index");
 const loaders = require("./loaders/index");
-const { userRoutes, postRoutes, companyRoutes, complaintRoutes, graduationProjectRoutes } = require("./api-routes");
+const { userRoutes, postRoutes, companyRoutes, complaintRoutes, graduationProjectRoutes, departmentRoutes } = require("./api-routes");
 const errorHandler = require("./middlewares/error-handler.middleware");
 const ApiError = require("./responses/error.response");
 const httpStatus = require("http-status");
@@ -22,6 +22,7 @@ app.use(fileUpload());
 
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
+app.use("/departments", departmentRoutes);
 app.use("/companies", companyRoutes);
 app.use("/complaints", complaintRoutes);
 app.use("/graduation-projects", graduationProjectRoutes);
