@@ -1,9 +1,9 @@
 const Joi = require("joi");
-const {registerSchema} = require('./user.validation')
+const { registerSchema } = require("./user.validation");
 
 const createStudentSchema = registerSchema.keys({
   studentId: Joi.string().required(),
-  department: Joi.string().required().min(1).max(100),
+  department: Joi.string().required(),
   grade: Joi.date(),
 });
 

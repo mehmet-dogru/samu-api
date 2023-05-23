@@ -42,7 +42,8 @@ const UserSchema = new mongoose.Schema(
       sparse: true,
     },
     department: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Department",
     },
     grade: {
       type: String,
