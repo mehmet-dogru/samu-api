@@ -63,7 +63,7 @@ class UserController {
         return { _id, firstName, lastName, email, profileImage, studentId, department };
       });
 
-      successResponse(res, httpStatus.OK, filteredUsers);
+      successResponse(res, httpStatus.OK, users);
     } catch (error) {
       return next(new ApiError(error.message, httpStatus.BAD_REQUEST));
     }
