@@ -1,5 +1,6 @@
 const httpStatus = require("http-status");
 const postService = require("../services/post.service");
+const userService = require("../services/user.service");
 const ApiError = require("../responses/error.response");
 const successResponse = require("../responses/success.response");
 const path = require("path");
@@ -18,9 +19,13 @@ class PostController {
           if (err) return next(new ApiError(err.message, httpStatus.INTERNAL_SERVER_ERROR));
         });
       }
+
+      const user = await userService.findById(req.userId);
+
       const post = await postService.create({
         author: req.userId,
         imageUrl: fileName,
+        department: user.department._id,
         ...req.body,
       });
 
@@ -31,6 +36,18 @@ class PostController {
   }
 
   async list(req, res, next) {
+    try {
+      const user = await userService.findById(req.userId);
+      const { page = 1, limit = 10 } = req.query;
+      const posts = await postService.list(page, limit, { department: user.department._id });
+
+      successResponse(res, httpStatus.OK, posts);
+    } catch (error) {
+      return next(new ApiError(error.message, httpStatus.BAD_REQUEST));
+    }
+  }
+
+  async listAll(req, res, next) {
     try {
       const { page = 1, limit = 10 } = req.query;
       const posts = await postService.list(page, limit);
