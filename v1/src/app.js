@@ -28,7 +28,7 @@ app.use("/complaints", complaintRoutes);
 app.use("/graduation-projects", graduationProjectRoutes);
 
 app.use((req, res, next) => {
-  next(new ApiError("endpoint not found", httpStatus.BAD_REQUEST));
+  next(new ApiError("Endpoint not found. Please enter valid enpoint", httpStatus.BAD_REQUEST));
 });
 
 app.use(errorHandler);
