@@ -88,6 +88,20 @@ class GraduationProjectController {
       return next(new ApiError(err.message, httpStatus.BAD_REQUEST));
     }
   }
+
+  async search(req, res, next) {
+    try {
+      const { page = 1, limit = 10 } = req.query;
+      const projects = await graduationProjectService.list(page, limit, { name: { $regex: new RegExp(".*" + req.query.name + ".*", "i") } });
+      if (projects.length == 0) {
+        return next(new ApiError("Projects not found", httpStatus.BAD_REQUEST));
+      }
+
+      successResponse(res, httpStatus.OK, projects);
+    } catch (err) {
+      return next(new ApiError(err.message, httpStatus.BAD_REQUEST));
+    }
+  }
 }
 
 module.exports = new GraduationProjectController();

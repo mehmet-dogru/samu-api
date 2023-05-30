@@ -31,4 +31,6 @@ router
 
 router.route("/:projectId").delete(authenticate, authorization([ROLES.ACADEMICIAN, ROLES.ADMIN]), graduationProjectController.remove);
 
+router.route("/search/name").get(authenticate, graduationProjectController.search);
+
 module.exports = router;
