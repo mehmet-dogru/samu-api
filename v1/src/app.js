@@ -9,6 +9,8 @@ const errorHandler = require("./middlewares/error-handler.middleware");
 const ApiError = require("./responses/error.response");
 const httpStatus = require("http-status");
 const path = require("path");
+const swaggerUI = require("swagger-ui-express");
+swaggerDocument = require("../../swagger.json");
 
 config();
 loaders();
@@ -20,6 +22,7 @@ app.use(helmet());
 app.use(cors());
 app.use(fileUpload());
 
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 app.use("/departments", departmentRoutes);
