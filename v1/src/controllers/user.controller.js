@@ -5,6 +5,7 @@ const ApiError = require("../responses/error.response");
 const successResponse = require("../responses/success.response");
 const ROLES = require("../references/role.reference");
 const path = require("path");
+const cloudinary = require("cloudinary").v2;
 
 class UserController {
   async register(req, res, next) {
@@ -71,21 +72,28 @@ class UserController {
 
   async updateProfileImage(req, res, next) {
     try {
-      if (!req?.files?.profileImage) {
-        return next(new ApiError("Please enter invalid data. This data not image or invalid key", httpStatus.BAD_REQUEST));
+      let fileName;
+
+      if (req?.files?.profileImage) {
+        const extension = path.extname(req.files.profileImage.name);
+        fileName = `${req.userId}${Date.now()}${extension}`;
+        const folderPath = path.join(__dirname, "../", "uploads/users", fileName);
+
+        req.files.profileImage.mv(folderPath, function (err) {
+          if (err) return next(new ApiError(err.message, httpStatus.INTERNAL_SERVER_ERROR));
+        });
+
+        const result = await cloudinary.uploader.upload(folderPath, {
+          use_filename: true,
+          folder: "samu-api/users",
+        });
+
+        fileName = result.secure_url;
       }
 
-      const extension = path.extname(req.files.profileImage.name);
-      const fileName = `${req.userId}${extension}`;
-      const folderPath = path.join(__dirname, "../", "uploads/users", fileName);
+      await userService.update(req.userId, { profileImage: fileName });
 
-      req.files.profileImage.mv(folderPath, async function (err) {
-        if (err) return next(new ApiError(err.message, httpStatus.INTERNAL_SERVER_ERROR));
-
-        await userService.update(req.userId, { profileImage: fileName });
-
-        successResponse(res, httpStatus.OK, { message: "Image upload successfully" });
-      });
+      successResponse(res, httpStatus.OK, { message: "Image upload successfully" });
     } catch (error) {
       return next(new ApiError(error.message, httpStatus.BAD_REQUEST));
     }
