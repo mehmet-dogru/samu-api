@@ -12,7 +12,7 @@ class PostService extends BaseService {
       .skip((page - 1) * limit)
       .populate({
         path: "author",
-        select: "firstName lastName",
+        select: "firstName lastName profileImage",
       })
       .populate({
         path: "department",
