@@ -5,11 +5,11 @@ const ApiError = require("../responses/error.response");
 async function verifyToken(req, res, next) {
   try {
     const authorization = req.header("Authorization");
-    const token = authorization.split(" ")[1];
-
-    if (!token) {
+    if (!authorization) {
       return next(new ApiError("Acces denied. No token provided", httpStatus.UNAUTHORIZED));
     }
+
+    const token = authorization.split(" ")[1];
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET_KEY, (error, decoded) => {
       if (error) {
