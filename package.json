@@ -9,6 +9,7 @@
   "author": "samu",
   "license": "ISC",
   "dependencies": {
+    "cloudinary": "^1.37.0",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",

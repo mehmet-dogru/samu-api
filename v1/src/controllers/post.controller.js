@@ -4,6 +4,7 @@ const userService = require("../services/user.service");
 const ApiError = require("../responses/error.response");
 const successResponse = require("../responses/success.response");
 const path = require("path");
+const cloudinary = require("cloudinary").v2;
 
 class PostController {
   async create(req, res, next) {
@@ -18,6 +19,13 @@ class PostController {
         req.files.imageUrl.mv(folderPath, function (err) {
           if (err) return next(new ApiError(err.message, httpStatus.INTERNAL_SERVER_ERROR));
         });
+
+        const result = await cloudinary.uploader.upload(folderPath, {
+          use_filename: true,
+          folder: "samu-api/posts",
+        });
+
+        fileName = result.secure_url;
       }
 
       const user = await userService.findById(req.userId);
