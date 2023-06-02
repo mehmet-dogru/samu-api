@@ -4,7 +4,7 @@
   "description": "samu-app",
   "main": "app.js",
   "scripts": {
-    "start": "node v1/src/app.js"
+    "start": "nodemon v1/src/app.js"
   },
   "author": "samu",
   "license": "ISC",
@@ -20,7 +20,8 @@
     "joi": "^17.7.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.4",
-    "nodemailer": "^6.8.0",
+    "nodemailer": "^6.9.3",
+    "nodemailer-express-handlebars": "^6.1.0",
     "nodemon": "^2.0.20",
     "path": "^0.12.7",
     "swagger-ui-express": "^4.6.3",
