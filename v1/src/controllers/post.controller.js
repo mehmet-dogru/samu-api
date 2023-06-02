@@ -4,6 +4,7 @@ const userService = require("../services/user.service");
 const ApiError = require("../responses/error.response");
 const successResponse = require("../responses/success.response");
 const path = require("path");
+const sendEmail = require("../scripts/utils/send-email.utils");
 const cloudinary = require("cloudinary").v2;
 
 class PostController {
@@ -37,6 +38,7 @@ class PostController {
         ...req.body,
       });
 
+      await sendEmail("Samsun Üniversitesinden Yeni Duyuru", post);
       successResponse(res, httpStatus.OK, post);
     } catch (error) {
       return next(new ApiError(error.message, httpStatus.BAD_REQUEST));
