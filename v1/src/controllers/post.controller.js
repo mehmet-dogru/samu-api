@@ -67,6 +67,20 @@ class PostController {
       return next(new ApiError(error.message, httpStatus.BAD_REQUEST));
     }
   }
+
+  async remove(req, res, next) {
+    try {
+      const post = await postService.delete(req.params.postId);
+
+      if (!post) {
+        return next(new ApiError("Not Found Post", httpStatus.BAD_REQUEST));
+      }
+
+      successResponse(res, httpStatus.OK, { _id: post._id, message: "Post deleted" });
+    } catch (err) {
+      return next(new ApiError(err.message, httpStatus.BAD_REQUEST));
+    }
+  }
 }
 
 module.exports = new PostController();
