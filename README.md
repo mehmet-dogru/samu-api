@@ -1,8 +1,5 @@
 # samu-api
 
-# Project Link
-https://grad.denizbora.net
-
 # University Graduates and Thesis Projects Monitoring Platform 🎓
 
 This project includes a platform that provides university students with the opportunity to showcase their post-graduation careers and the companies they work for. Additionally, academics have the ability to process students' requests and feedback. They can also view, record, and delete thesis projects within university departments.
